@@ -19,6 +19,7 @@ class base_controller {
 			$this->user = $this->userObj->authenticate();					
 						
 		# Set up templates
+			#THIS IS THE MASTER TEMPLATE THAT WILL BE SETUP FOR US
 			$this->template 	  = View::instance('_v_template');
 			$this->email_template = View::instance('_v_email');			
 								
