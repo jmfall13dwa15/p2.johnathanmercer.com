@@ -1,5 +1,5 @@
 <?php if(isset($user_name)): ?>
-    <h1>This is the profile for <?=$user_name?></h1>
+	<h2>This is the profile for <?=$user_name?></h2>
 <?php else: ?>
-    <h1>No user specified</h1>
+	<h2>No user has been specified</h2>
 <?php endif; ?>

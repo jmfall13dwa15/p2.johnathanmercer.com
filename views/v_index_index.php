@@ -1,11 +1,11 @@
-<p>
-	Hello World! You have successfully spawned a new application.
-</p>
 
-<p>
-	This message is being triggered via the c_index.php controller, within the index() method.
-</p>
+<div class="home-hero">
+    <h2> Welcome to MercMicro Blog </h2>
+    <h4> Because the world needs another blog ... Ba!  </h4>
 
-<p>
-	<strong>Since everything is in working order, you should now delete <?php echo APP_PATH?>diagnostics.php</strong>
-</p>
+    <div style="opacity: .9;">
+        <a class="btn btn-large" href="/users/signup"><img src=" " class="pull-left" style="margin-right:6px;"/> Register </a>
+        <a class="btn btn-large" href="/users/login">
+            <img src=" " class="pull-left" style="margin-right:6px"/> Login </a>
+    </div>
+</div>

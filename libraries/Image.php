@@ -7,7 +7,6 @@ class Image {
 	protected $height;
 	protected $mimetype;
 	
-	# constructor method
 	public function __construct($filename) {
 		
 		# Read the image file to a binary buffer
