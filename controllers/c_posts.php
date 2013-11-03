@@ -11,12 +11,15 @@ class posts_controller extends base_controller {
 		parent::__construct();
 		
 		# Only let logged in users access the methods in this controller
-		if(!$this->user) {
-			die("Members only");
+		if(!$this->user){
+
+			#direct them to the login page and have a custom error
+			Router::redirect('/users/oops');
+
+			#die("Members only");
 		}
 		
 	} 
-	
 	 
 	/*-------------------------------------------------------------------------------------------------
 	Display a new post form
@@ -29,7 +32,6 @@ class posts_controller extends base_controller {
 		
 	}	
 	
-	
 	/*-------------------------------------------------------------------------------------------------
 	Process new posts
 	-------------------------------------------------------------------------------------------------*/
@@ -39,6 +41,7 @@ class posts_controller extends base_controller {
 		$_POST['created']  = Time::now();
 		$_POST['modified'] = Time::now();
 		
+		#we don't need to sanitize bc insert already sanitizes
 		DB::instance(DB_NAME)->insert('posts',$_POST);
 		
 		Router::redirect('/posts/');
@@ -72,13 +75,8 @@ class posts_controller extends base_controller {
 		# Run query	
 		$posts = DB::instance(DB_NAME)->select_rows($q);
 		
-		/*
-		$f_cnt = 'SELECT 
-				   COUNT(user_id) AS following_cnt
-				   FROM users_users 
-				   WHERE user_id = '.$this->user->user_id;
-				   */
 		#query for the array of people the user is following
+		#so I can count how many people they are following
 		$f_cnt = 'SELECT *  
 				   FROM users_users 
 				   WHERE user_id = '.$this->user->user_id;
@@ -86,15 +84,15 @@ class posts_controller extends base_controller {
 		# Run query	
 		$posts = DB::instance(DB_NAME)->select_rows($q);
 
+		# run the query for the followees
 		$following_cnt = DB::instance(DB_NAME)->select_rows($f_cnt , $type = 'array'); #query($f_cnt);
 
 		# Pass $posts array to the view
 		$this->template->content->posts = $posts;
+		# Pass the number of posts to the view
 		$this->template->content->num_of_posts = count($posts);
-		# Pass $following_cnt array to the view
+		# Pass the number of followees to the view
 		$this->template->content->following_cnt = count($following_cnt);
-
-		ChromePhp::log(count($following_cnt));
 
 		# Render view
 		echo $this->template;

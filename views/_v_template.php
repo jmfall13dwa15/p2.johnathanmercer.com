@@ -71,7 +71,7 @@
 
                     <ul class="nav pull-right">                    
                         <li class="login-menu"><a href="/users/login">Log in</a></li>
-                        <li class="register-menu"><a href="/users/signup">SignUp</a></li> 
+                        <li class="register-menu"><a href="/users/signup">Sign up</a></li> 
 
                     </ul>
                 </div>
