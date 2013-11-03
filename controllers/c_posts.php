@@ -24,8 +24,8 @@ class posts_controller extends base_controller {
 	/*-------------------------------------------------------------------------------------------------
 	Display a new post form
 	-------------------------------------------------------------------------------------------------*/
-	public function add() {
-		
+	public function add($post_id_to_update=null) {
+
 		#first get all the user's posts
 		$my_posts_query = 'SELECT *
 							FROM posts 
@@ -37,28 +37,58 @@ class posts_controller extends base_controller {
 		$this->template->content = View::instance("v_posts_add");
 		
 		$this->template->content->my_posts = $posts;
+
+		#if the update is not null then run query to get content
+		if ($post_id_to_update != null){
+			$get_post_query = 'SELECT content
+								FROM posts 
+								WHERE user_id = '.$this->user->user_id.' AND post_id = '.$post_id_to_update;
+			$post = DB::instance(DB_NAME)->select_row($get_post_query);
+			ChromePhp::log($post);
+			$this->template->content->post_to_update = $post[content];
+			$this->template->content->post_id_to_update = $post_id_to_update;
+		}else{
+
+		}
+
+		$this->template->content->post_id_to_update = $post_id_to_update;
 		echo $this->template;
 		
-	}	
+	}
+
+	public function p_update($id_to_update) {
+		
+		$_POST['user_id']  = $this->user->user_id;
+
+		$_POST['modified'] = Time::now();
+		
+		if($_POST['content']==''){
+			$this->template->content = View::instance("v_posts_add");
+			$this->template->content->error = "Post Content is Empty";
+			$this->template->content->post_to_update = $_POST['content'];
+			$this->template->content->post_id_to_update = $id_to_update;
+			echo $this->template;
+			return;
+		}
+
+		DB::instance(DB_NAME)->update("posts", $_POST, "WHERE post_id = ".$id_to_update);
+
+		Router::redirect('/posts/add');
+		
+	}
 
 	public function delete($uid, $pid) {
 		
-		//ChromePhp::log($uid);
-		//ChromePhp::log($pid);
-
+		#don't let them delete a post unless it's their own!
 		if($uid != $this->user->user_id){
-			//$this->template->content = View::instance("v_users_oops_general");
-			//$error_message = "Not Allowed To Delete Others Posts.";
-			//$this->template->content->error_message = $error_message;
-			//echo $this->template;
 			Router::redirect('/users/general_oops');
 		}else{
 
+			#define the where condition
 			$where_condition = 'WHERE user_id='.$this->user->user_id.' AND post_id='.$pid;
-			
-			ChromePhp::log($where_condition);
+			#db query
 			DB::instance(DB_NAME)->delete('posts',$where_condition);
-			
+			#now redirect
 			Router::redirect('/posts/add');
 		}
 	}	
@@ -72,13 +102,27 @@ class posts_controller extends base_controller {
 		$_POST['created']  = Time::now();
 		$_POST['modified'] = Time::now();
 		
-		#we don't need to sanitize bc insert already sanitizes
-		DB::instance(DB_NAME)->insert('posts',$_POST);
-		
-		Router::redirect('/posts/add');
+		if($_POST['content']==''){
+			$this->template->content = View::instance("v_posts_add");
+			$this->template->content->error = "Post Content is Empty";
+
+			# I know, I know: should have combined p_add and add
+			$my_posts_query = 'SELECT *
+								FROM posts 
+								WHERE user_id = '.$this->user->user_id;
+			# Run query	
+			$posts = DB::instance(DB_NAME)->select_rows($my_posts_query);
+			$this->template->content->my_posts = $posts;
+			$this->template->content->post_to_update = null;
+			echo $this->template;
+		}else{
+
+			DB::instance(DB_NAME)->insert('posts',$_POST);
+			Router::redirect('/posts/add');
+
+		}
 		
 	}
-	
 	
 	/*-------------------------------------------------------------------------------------------------
 	View all posts
@@ -154,8 +198,6 @@ class posts_controller extends base_controller {
 		# Run query
 		$connections = DB::instance(DB_NAME)->select_array($q,'user_id_followed');
 		
-		ChromePhp::log('hi');
-
 		# Pass data to the view
 		$this->template->content->users       = $users;
 		$this->template->content->connections = $connections;

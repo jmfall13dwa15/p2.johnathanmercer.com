@@ -1,0 +1,76 @@
+2013-11-03 12:05:00 - INFO --> -------------------------- 
+2013-11-03 12:05:00 - INFO --> Controller/Method: users/signup 
+2013-11-03 12:05:00 - INFO --> OUTGOING EMAILS ARE DISABLED. THIS EMAIL WAS NOT SENT TO THE RECIPIENTS, ONLY mercer@fas.harvard.edu 
+2013-11-03 12:05:00 - INFO --> From: MercMicroBlog (mercer@fas.harvard.edu) 
+2013-11-03 12:05:00 - INFO --> To: John (mercer@broadinstitute.org),  
+2013-11-03 12:05:00 - INFO --> CC:  
+2013-11-03 12:05:00 - INFO --> BCC:  
+2013-11-03 12:05:00 - INFO --> Subject: Welcome to MercMicro Blog :-) 
+2013-11-03 12:05:00 - INFO --> Body: 
+Welcome to MercMicro Blog!
+
+This feature is helping me fulfill a +1 requirement for this assignment!
+So, thanks for helping and I look forward to seeing your posts ;)
+
+Best,
+John 
+2013-11-03 12:07:09 - INFO --> -------------------------- 
+2013-11-03 12:07:09 - INFO --> Controller/Method: users/signup 
+2013-11-03 12:07:09 - INFO --> From: MercMicroBlog (mercer@fas.harvard.edu) 
+2013-11-03 12:07:09 - INFO --> To: John (mercer@broadinstitute.org),  
+2013-11-03 12:07:09 - INFO --> CC:  
+2013-11-03 12:07:09 - INFO --> BCC:  
+2013-11-03 12:07:09 - INFO --> Subject: Welcome to MercMicro Blog :-) 
+2013-11-03 12:07:09 - INFO --> Body: 
+Welcome to MercMicro Blog!
+
+This feature is helping me fulfill a +1 requirement for this assignment!
+So, thanks for helping and I look forward to seeing your posts ;)
+
+Best,
+John 
+2013-11-03 13:45:32 - INFO --> -------------------------- 
+2013-11-03 13:45:32 - INFO --> Controller/Method: users/signup 
+2013-11-03 13:45:32 - INFO --> From: MercMicroBlog (mercer@fas.harvard.edu) 
+2013-11-03 13:45:32 - INFO --> To: John (presci3nce@gmail.com),  
+2013-11-03 13:45:32 - INFO --> CC:  
+2013-11-03 13:45:32 - INFO --> BCC:  
+2013-11-03 13:45:32 - INFO --> Subject: Welcome to MercMicro Blog :-) 
+2013-11-03 13:45:32 - INFO --> Body: 
+Welcome to MercMicro Blog!
+
+This feature is helping me fulfill a +1 requirement for this assignment!
+So, thanks for helping and I look forward to seeing your posts ;)
+
+Best,
+John 
+2013-11-03 14:07:03 - INFO --> -------------------------- 
+2013-11-03 14:07:03 - INFO --> Controller/Method: users/signup 
+2013-11-03 14:07:03 - INFO --> From: MercMicroBlog (mercer@fas.harvard.edu) 
+2013-11-03 14:07:03 - INFO --> To: John (presci3nce@gmail.com),  
+2013-11-03 14:07:03 - INFO --> CC:  
+2013-11-03 14:07:03 - INFO --> BCC:  
+2013-11-03 14:07:03 - INFO --> Subject: Welcome to MercMicro Blog :-) 
+2013-11-03 14:07:03 - INFO --> Body: 
+Welcome to MercMicro Blog!
+
+This feature is helping me fulfill a +1 requirement for this assignment!
+So, thanks for helping and I look forward to seeing your posts ;)
+
+Best,
+John 
+2013-11-03 14:08:17 - INFO --> -------------------------- 
+2013-11-03 14:08:17 - INFO --> Controller/Method: users/signup 
+2013-11-03 14:08:17 - INFO --> From: MercMicroBlog (mercer@fas.harvard.edu) 
+2013-11-03 14:08:17 - INFO --> To: John (presci3nce@gmail.com),  
+2013-11-03 14:08:17 - INFO --> CC:  
+2013-11-03 14:08:17 - INFO --> BCC:  
+2013-11-03 14:08:17 - INFO --> Subject: Welcome to MercMicro Blog :-) 
+2013-11-03 14:08:17 - INFO --> Body: 
+Welcome to MercMicro Blog!
+
+This feature is helping me fulfill a +1 requirement for this assignment!
+So, thanks for helping and I look forward to seeing your posts ;)
+
+Best,
+John 

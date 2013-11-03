@@ -109,6 +109,21 @@ class users_controller extends base_controller {
             #log them in automatically
             setcookie("token", $_POST['token'], strtotime('+1 year'), '/');
 
+            #before redirecting send them an email thanking them for signing up
+
+            #email parameters (see Email class)
+            #$to_line[]    = Array("name" => $_POST['first_name'], "email" => $_POST['email']);
+            #$from_line    = Array("name" => APP_NAME, "email" => APP_EMAIL);
+            #$subject_line = "Welcome to MercMicro Blog :-)";              
+                
+            #$body_template = View::instance('v_email_welcome_msg');
+                
+            #$cc  = "";
+            #$bcc = "";
+
+            // Send email
+            #Email::send($to_line, $from_line, $subject_line, $body_template, true, $cc, $bcc);
+
             #Redirect new user to the posts page
             Router::redirect('/posts/');
         }

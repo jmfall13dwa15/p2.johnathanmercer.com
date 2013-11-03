@@ -6,19 +6,19 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />	
 					
 	<!-- JS/CSS File we want on every page -->
-	<script type="text/javascript" src="../js/jquery-1.8.2.min.js"></script>				
-    <script type="text/javascript" src="../js/bootstrap.min.js"></script>             
+	<script type="text/javascript" src="/js/jquery-1.8.2.min.js"></script>				
+    <script type="text/javascript" src="/js/bootstrap.min.js"></script>             
     
 	<!-- CSS I want on every page  -->
-	<link href="../css/bootstrap.css" rel="stylesheet">
+	<link href="/css/bootstrap.css" rel="stylesheet">
 
     <style>
         body { padding-top: 60px;}
     </style>
-    <link href= "../css/bootstrap-responsive.css" rel="stylesheet">
-    <link href="../css/styles.css" rel="stylesheet">
-    <link href="../css/demo_page.css" rel="stylesheet">
-    <link href="../css/demo_table.css" rel="stylesheet">
+    <link href= "/css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="/css/styles.css" rel="stylesheet">
+    <link href="/css/demo_page.css" rel="stylesheet">
+    <link href="/css/demo_table.css" rel="stylesheet">
     
     <script src="http://use.edgefonts.net/andika.js"></script>
     <script src="http://use.edgefonts.net/arvo.js"></script>
