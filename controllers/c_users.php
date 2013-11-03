@@ -130,12 +130,73 @@ class users_controller extends base_controller {
     }
     */
 
+    /*
     public function login() {
     
     	$this->template->content = View::instance('v_users_login');
     	$this->template->title = "Login";    	
     	echo $this->template;   
        
+    }
+	*/
+
+    #new login with form validation
+    public function login() {
+    
+    	$this->template->content = View::instance('v_users_login');
+    	$this->template->title = "Login";    	 
+
+    	# render template if not submitting form
+        if(!$_POST) {
+            echo $this->template;
+            return;
+        }  
+       
+        $email_not_populated = false;
+        $password_not_populated = false;
+        $invalid_password = false;
+
+        if($_POST['email']==''){
+        	$email_not_populated = true;
+        }
+
+        if($_POST['password']==''){
+        	$password_not_populated = true;
+        }
+
+        #sanitize for security
+        $_POST = DB::instance(DB_NAME)->sanitize($_POST);
+
+        $test_query = "SELECT email, password, token 
+			        	  FROM users 
+			        	 WHERE email = '" . $_POST['email'] . "'";
+
+        $test = DB::instance(DB_NAME)->select_row($test_query);
+
+        #ChromePhp::log(count($test));
+
+        # if the email wasn't found than give an invalid email msg
+        if (count($test)==0){
+        	$errors = array();
+			array_push($errors,"Email not found.");
+            $this->template->content->errors = $errors;
+            echo $this->template; 
+            return;
+        }else{
+        	#if the email was found then check the password
+	        $_POST['password'] = sha1(PASSWORD_SALT.$_POST['password']);
+
+			if(strcmp($test['password'], $_POST['password']) != 0){
+				$errors = array();
+				array_push($errors,"Invalid password.");
+           	    $this->template->content->errors = $errors;
+            	echo $this->template; 
+            	return;
+			}else{
+				setcookie('token',$test['token'], strtotime('+1 year'), '/');
+				Router::redirect('/posts');
+			}
+        }
     }
     
     public function p_login() {
@@ -173,9 +234,6 @@ class users_controller extends base_controller {
 
     public function logout() {
         
-       ChromePhp::log('In the logout controller');
-
-	   ChromePhp::log($user->first_name);
        # Generate a new token they'll use next time they login
        # this is extra security 
        $new_token = sha1(TOKEN_SALT.$this->user->email.Utils::generate_random_string());
@@ -198,18 +256,35 @@ class users_controller extends base_controller {
     public function profile($user_name = NULL) {
 		
 		# Only logged in users are allowed...
-		if(!$this->user) {
-			# print to the page and stop doing anything else
-			die('You have requested a members only page. Please <a href="/users/login">Login</a>');
+		if(!$this->user){
+			#  redirect to the oops page
+			Router::redirect('/users/oops');
 		}
 		
 		# Set up the View
 		$this->template->content = View::instance('v_users_profile');
 		$this->template->title   = "Profile";
-				
+		
+		#query for the number of people I am following
+		$f_query = 'SELECT *  
+		   FROM users_users 
+		   WHERE user_id = '.$this->user->user_id;
+
+		# run the query for the number of people I am following
+		$following = DB::instance(DB_NAME)->select_rows($f_query , $type = 'array');
+
+		# query for the number of posts I have made
+		$my_posts_query = 'SELECT *
+							FROM posts 
+							WHERE user_id = '.$this->user->user_id;
+		
+		# Run query	
+		$posts = DB::instance(DB_NAME)->select_rows($my_posts_query);
+
 		# Pass the data to the View
 		$this->template->content->user_name = $user_name;
-		
+		$this->template->content->following_cnt = count($following);
+		$this->template->content->post_cnt = count($posts);
 		# Display the view
 		echo $this->template;
 		

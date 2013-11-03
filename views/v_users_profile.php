@@ -1,7 +1,17 @@
-<?php if(isset($user_name)): ?>
-	<h2>This is the profile for <?=$user_name?></h2>
+
+<legend> <?=$user->first_name?>'s Profile!  </legend>
+
+<?php if ($following_cnt==0): ?>
+	You aren't following anyone yet!
 <?php else: ?>
-	<h2>No user has been specified</h2>
+	You are following <?= $following_cnt ?> people.
 <?php endif; ?>
 
+<br>
+<br>
 
+<?php if ($post_cnt==0): ?>
+	You you haven't posted yet!
+<?php else: ?>
+	You have <?= $post_cnt ?> post <?php if($post_cnt>1) echo "'s" ?>.
+<?php endif; ?>
