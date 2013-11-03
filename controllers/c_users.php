@@ -19,6 +19,7 @@ class users_controller extends base_controller {
 		
 	}	
 
+	/*
     public function signup() {
        
        # Set up the view
@@ -29,7 +30,86 @@ class users_controller extends base_controller {
        echo $this->template;
 
     }
+    */
+
+	public function signup() {
+
+     	$this->template->content = View::instance('v_users_signup');
+        $this->template->title   = "Sign up";
+
+        # render template if not submitting form
+        if(!$_POST) {
+            echo $this->template;
+            return;
+        }
+
+        # initialize error variables
+
+        $email_taken = false;
+
+        $first_name_missing = ($_POST['first_name'] == "") ? true : false;
+		$last_name_missing = ($_POST['last_name'] == "") ? true : false;
+		$password_empty = ($_POST['password'] == "") ? true : false;
+
+        $_POST = DB::instance(DB_NAME)->sanitize($_POST);
+
+        $email_query = "SELECT email 
+			        	  FROM users 
+			        	 WHERE email = '" . $_POST['email'] . "'";
+
+        $found_email = DB::instance(DB_NAME)->select_field($email_query);
+
+        $email_taken = isset($found_email) ? true : false; 
+
+        $error_in_form_found = ($email_taken || 
+		        	            $first_name_missing || 
+		        	            $last_name_missing ||
+		        	            $password_empty) ? true : false;
+
+        #if an error is found then populate the error array and refresh view
+        if ($error_in_form_found){
+
+        	#create error array
+        	$errors = array();
+        	
+        	if($email_taken) array_push($errors,"Email is taken.");
+        	if($first_name_missing) array_push($errors,"First name is missing.");
+        	if($last_name_missing) array_push($errors,"Last name is missing.");
+        	if($password_empty) array_push($errors,"Password is empty.");
+
+            $this->template->content->errors = $errors;
+            echo $this->template;     
+
+        }else{
+ 
+            $same_time  = Time::now();
+            $_POST['token'] = sha1(TOKEN_SALT.$_POST['email'].Utils::generate_random_string());
+            
+            #define the new user array
+			$new_user = Array(
+								'first_name' => $_POST['first_name'],
+								 'last_name' => $_POST['last_name'],
+								   'created' => $same_time,
+								  'modified' => $same_time,
+								  'password' => sha1(PASSWORD_SALT.$_POST['password']),
+								     'token' => $_POST['token'],
+								     'email' => $_POST['email']
+							);
+
+			#ChromePhp::log($new_user);
+
+            # Do the insert
+            DB::instance(DB_NAME)->insert('users', $new_user);
+ 
+            #log them in automatically
+            setcookie("token", $_POST['token'], strtotime('+1 year'), '/');
+
+            #Redirect new user to the posts page
+            Router::redirect('/posts/');
+        }
+    } 
     
+    /*
     public function p_signup() {
 	    	    
 	    # Mark the time
@@ -48,6 +128,7 @@ class users_controller extends base_controller {
 	    Router::redirect('/users/login');
 	    
     }
+    */
 
     public function login() {
     
