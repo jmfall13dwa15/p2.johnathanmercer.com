@@ -6,15 +6,12 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />	
 					
 	<!-- JS/CSS File we want on every page -->
-	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>				
-	
+	<script type="text/javascript" src="../js/jquery-1.8.2.min.js"></script>				
+    <script type="text/javascript" src="../js/bootstrap.min.js"></script>             
+    
 	<!-- CSS I want on every page  -->
 	<link href="../css/bootstrap.css" rel="stylesheet">
-    <!--
-    <style>
-        body { padding-top: 60px;}
-    </style>
-    -->
+
     <style>
         body { padding-top: 60px;}
     </style>
@@ -41,40 +38,50 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </a>
-            <a class="brand" href="/">MercMicro Blog</a>
 
-            <?php if(isset($first_name)): ?>
-            <div class="nav-collapse collapse logged-in-menu">
+            <a class="brand" href= <?php if($user){ echo '/posts';}else{ echo '/' ;}?> >
+                MercMicro Blog
+            </a>
 
-                <ul class="nav">
-                    <li class="add-menu"><a href="/users">Users</a></li> 
-                </ul>
+            <?php if($user): ?>
+                <div class="nav-collapse collapse logged-in-menu">
 
-                <ul class="nav pull-right">
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <?php $first_name ?> <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="users/profile">Profile</a></li>
-                            <li><a href="users/logout">Log out</a></li>                            
-                        </ul>
-                    </li>
-                </ul>
-            </div>
+                    <ul class="nav"> 
+                        <li class="add-menu"><a href="/posts/add">Add Post</a></li> 
+                        <li class="add-menu"><a href="/posts">View Posts</a></li> 
+                        <li class="add-menu"><a href="/posts/users">Follow Users</a></li> 
+
+                    </ul>
+
+                    <ul class="nav pull-right">
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown"> 
+                                <?php if(isset($user->first_name)) echo $user->first_name; ?>
+                                <b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href='/users/profile'>Profile</a></li>
+                                <li><a href='/users/logout'>Log out</a></li>                            
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
             <?php else: ?>
-            <div class="nav-collapse collapse logged-out-menu">
+                <div class="nav-collapse collapse logged-out-menu">
 
-                <ul class="nav pull-right">                    
-                    <li class="login-menu"><a href="/users/login">Log in</a></li>
-                    <li class="register-menu"><a href="/users/signup">SignUp</a></li> 
+                    <ul class="nav pull-right">                    
+                        <li class="login-menu"><a href="/users/login">Log in</a></li>
+                        <li class="register-menu"><a href="/users/signup">SignUp</a></li> 
 
-                </ul>
-            </div>
+                    </ul>
+                </div>
             <?php endif; ?>
         </div>
     </div>
 </div>
 <div class="container">
 	<div class="page">
+        
 		<?php if(isset($content)) echo $content; ?>
 
 		<?php if(isset($client_files_body)) echo $client_files_body; ?>

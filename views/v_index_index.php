@@ -1,4 +1,7 @@
 
+<?php if($user): ?>
+	<h2> Welcome <?php echo $user->first_name; ?>!</h2>
+<?php else: ?>
 <div class="home-hero">
     <h2> Welcome to MercMicro Blog </h2>
     <h4> Because the world needs another blog ... Ba!  </h4>
@@ -9,3 +12,4 @@
             <img src=" " class="pull-left" style="margin-right:6px"/> Login </a>
     </div>
 </div>
+<?php endif; ?>

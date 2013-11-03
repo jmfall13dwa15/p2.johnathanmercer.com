@@ -1,0 +1,43 @@
+<div class="row-fluid status-bar">
+    <div class="span12">
+         <?php if(isset($error)): ?> 
+            <div class="alert alert-success" style= "display:inline" >
+        <?php else: ?> 
+            <div class="alert alert-success" style= "display:none" >
+        <?php endif; ?>
+         
+        <?php if(isset($error)): echo "<b>".$error."<b>"; ?>
+    </div>
+</div>
+
+<?php if(isset($user->first_name)) echo $user->first_name; ?>
+
+  var hi = JSON.parse('{"a":1, "b":2}');
+    console.log(hi);
+
+///////// input with error  http://bootstrap.stage42.net/doc/forms
+
+      <div class="clearfix error">
+            <label for="errorInput">Input with error</label>
+            <div class="input">
+              <input class="xlarge error" id="errorInput" name="errorInput" size="30" type="text" />
+              <span class="help-inline">Small snippet of help text</span>
+            </div>
+          </div><!-- /clearfix -->
+
+form .clearfix.error>label,form .clearfix.error .help-block,form .clearfix.error .help-inline{color:#b94a48;}
+form .clearfix.error input,form .clearfix.error textarea{color:#b94a48;border-color:#ee5f5b;}form .clearfix.error input:focus,form .clearfix.error textarea:focus{border-color:#e9322d;-webkit-box-shadow:0 0 6px #f8b9b7;-moz-box-shadow:0 0 6px #f8b9b7;box-shadow:0 0 6px #f8b9b7;}
+form .clearfix.error .input-prepend .add-on,form .clearfix.error .input-append .add-on{color:#b94a48;background-color:#fce6e6;border-color:#b94a48;}
+form .clearfix.warning>label,form .clearfix.warning .help-block,form .clearfix.warning .help-inline{color:#c09853;}
+form .clearfix.warning input,form .clearfix.warning textarea{color:#c09853;border-color:#ccae64;}form .clearfix.warning input:focus,form .clearfix.warning textarea:focus{border-color:#be9a3f;-webkit-box-shadow:0 0 6px #e5d6b1;-moz-box-shadow:0 0 6px #e5d6b1;box-shadow:0 0 6px #e5d6b1;}
+form .clearfix.warning .input-prepend .add-on,form .clearfix.warning .input-append .add-on{color:#c09853;background-color:#d2b877;border-color:#c09853;}
+form .clearfix.success>label,form .clearfix.success .help-block,form .clearfix.success .help-inline{color:#468847;}
+form .clearfix.success input,form .clearfix.success textarea{color:#468847;border-color:#57a957;}form .clearfix.success input:focus,form .clearfix.success textarea:focus{border-color:#458845;-webkit-box-shadow:0 0 6px #9acc9a;-moz-box-shadow:0 0 6px #9acc9a;box-shadow:0 0 6px #9acc9a;}
+form .clearfix.success .input-prepend .add-on,form .clearfix.success .input-append .add-on{color:#468847;background-color:#bcddbc;border-color:#468847;}
+.input-mini,input.mini,textarea.mini,select.mini{width:60px;}
+.input-small,input.small,textarea.small,select.small{width:90px;}
+.input-medium,input.medium,textarea.medium,select.medium{width:150px;}
+.input-large,input.large,textarea.large,select.large{width:210px;}
+.input-xlarge,input.xlarge,textarea.xlarge,select.xlarge{width:270px;}
+.input-xxlarge,input.xxlarge,textarea.xxlarge,select.xxlarge{width:530px;}
+textarea.xxlarge{overflow-y:auto;}

@@ -1,6 +1,6 @@
 <!-- <h2>Sign Up</h2>
  -->
-<form class="edit-user-form" method='POST' action='/users/signup'>
+<form class="edit-user-form" method='POST' action='/users/p_signup'>
 
 	<legend> Register </legend>
 	<label>First Name</label>
