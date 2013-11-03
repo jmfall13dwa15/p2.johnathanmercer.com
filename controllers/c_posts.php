@@ -26,10 +26,41 @@ class posts_controller extends base_controller {
 	-------------------------------------------------------------------------------------------------*/
 	public function add() {
 		
+		#first get all the user's posts
+		$my_posts_query = 'SELECT *
+							FROM posts 
+							WHERE user_id = '.$this->user->user_id;
+		
+		# Run query	
+		$posts = DB::instance(DB_NAME)->select_rows($my_posts_query);
+
 		$this->template->content = View::instance("v_posts_add");
 		
+		$this->template->content->my_posts = $posts;
 		echo $this->template;
 		
+	}	
+
+	public function delete($uid, $pid) {
+		
+		//ChromePhp::log($uid);
+		//ChromePhp::log($pid);
+
+		if($uid != $this->user->user_id){
+			//$this->template->content = View::instance("v_users_oops_general");
+			//$error_message = "Not Allowed To Delete Others Posts.";
+			//$this->template->content->error_message = $error_message;
+			//echo $this->template;
+			Router::redirect('/users/general_oops');
+		}else{
+
+			$where_condition = 'WHERE user_id='.$this->user->user_id.' AND post_id='.$pid;
+			
+			ChromePhp::log($where_condition);
+			DB::instance(DB_NAME)->delete('posts',$where_condition);
+			
+			Router::redirect('/posts/add');
+		}
 	}	
 	
 	/*-------------------------------------------------------------------------------------------------
@@ -44,7 +75,7 @@ class posts_controller extends base_controller {
 		#we don't need to sanitize bc insert already sanitizes
 		DB::instance(DB_NAME)->insert('posts',$_POST);
 		
-		Router::redirect('/posts/');
+		Router::redirect('/posts/add');
 		
 	}
 	

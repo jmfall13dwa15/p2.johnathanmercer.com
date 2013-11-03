@@ -10,11 +10,16 @@ class users_controller extends base_controller {
     }
 
     public function oops() {
+			
+		$this->template->content = View::instance("v_users_oops");	
+		echo $this->template;
+		
+	}	
+
+    public function general_oops($error = NULL){
 	
-		ChromePhp::log('users/index');
-		
-		$this->template->content = View::instance("v_users_oops");
-		
+		$this->template->content = View::instance("v_users_err_general");
+		$this->template->content->error_message = $error;
 		echo $this->template;
 		
 	}	
@@ -108,38 +113,7 @@ class users_controller extends base_controller {
             Router::redirect('/posts/');
         }
     } 
-    
-    /*
-    public function p_signup() {
-	    	    
-	    # Mark the time
-	    $_POST['created']  = Time::now();
-	    
-	    # Hash password
-	    $_POST['password'] = sha1(PASSWORD_SALT.$_POST['password']);
-	    
-	    # Create a hashed token
-	    $_POST['token']    = sha1(TOKEN_SALT.$_POST['email'].Utils::generate_random_string());
-	    
-	    # Insert the new user    
-	    DB::instance(DB_NAME)->insert_row('users', $_POST);
-	    
-	    # Send them to the login page
-	    Router::redirect('/users/login');
-	    
-    }
-    */
-
-    /*
-    public function login() {
-    
-    	$this->template->content = View::instance('v_users_login');
-    	$this->template->title = "Login";    	
-    	echo $this->template;   
-       
-    }
-	*/
-
+   
     #new login with form validation
     public function login() {
     

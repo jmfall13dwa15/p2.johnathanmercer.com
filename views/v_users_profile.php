@@ -11,7 +11,7 @@
 <br>
 
 <?php if ($post_cnt==0): ?>
-	You you haven't posted yet!
+	You don't have any posts - go get social!
 <?php else: ?>
 	You have <?= $post_cnt ?> post <?php if($post_cnt>1) echo "'s" ?>.
 <?php endif; ?>

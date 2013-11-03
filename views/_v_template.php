@@ -23,9 +23,6 @@
     <script src="http://use.edgefonts.net/andika.js"></script>
     <script src="http://use.edgefonts.net/arvo.js"></script>
 
-	<!-- Controller Specific JS/CSS -->
-	<?php if(isset($client_files_head)) echo $client_files_head; ?>
-		
 </head>
 
 <body>	
@@ -47,9 +44,9 @@
                 <div class="nav-collapse collapse logged-in-menu">
 
                     <ul class="nav"> 
-                        <li class="add-menu"><a href="/posts/add">Add Post</a></li> 
-                        <li class="add-menu"><a href="/posts">View Posts</a></li> 
-                        <li class="add-menu"><a href="/posts/users">Follow Users</a></li> 
+                        <li class="add-menu"><a href="/posts/add">Manage My Posts</a></li> 
+                        <li class="add-menu"><a href="/posts">Post Feed</a></li> 
+                        <li class="add-menu"><a href="/posts/users">Follow </a></li> 
 
                     </ul>
 
